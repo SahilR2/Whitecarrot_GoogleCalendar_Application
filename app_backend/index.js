@@ -60,6 +60,7 @@ app.get("/auth/google",
     })
 );
 
+// This is just for authentication here and what else it can do :)
 app.get("/api/auth/status", (req, res) => {
     res.json({ 
       isAuthenticated: req.isAuthenticated(),
@@ -75,8 +76,47 @@ app.get("/auth/google/callback",
     }
 );
 
+
+app.get("/api/events", async (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+  
+    const oauth2Client = new google.auth.OAuth2();
+    oauth2Client.setCredentials({
+      access_token: req.user.accessToken, 
+    });
+  
+    const calendar = google.calendar({ version: "v3", auth: oauth2Client });
+  
+    try {
+      const response = await calendar.events.list({
+        calendarId: "primary", 
+        timeMin: new Date().toISOString(), 
+        maxResults: 10, 
+        singleEvents: true,
+        orderBy: "startTime",
+      });
+      //creating events which stores all the information i want in frontend to display ;) lets see
+      const events = response.data.items.map((event) => ({
+        id: event.id,
+        summary: event.summary,
+        start: event.start,
+        end: event.end,
+        location: event.location || "No location", 
+      }));
+      res.json(events); 
+    //   res.json(response.data.items); this just returning the data.items where i m not getting any location commenting that's why!...
+    } catch (error) {
+      console.error("Error fetching calendar events:", error);
+      res.status(500).json({ error: "Failed to fetch calendar events" });
+    }
+});
+
+
  
 app.get("/logout", (req, res) => {
+    //i used passport logOut which logouts the user and route it to base url but then for err logging im using this 
     req.logout((err) => {
       if (err) {
         return res.status(500).json({ error: "Error logging out" });
