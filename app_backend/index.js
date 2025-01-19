@@ -19,7 +19,7 @@ app.use(session({
 );
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://whitecarrot-google-calendar-application.vercel.app/",
     credentials: true  
 }));
 
@@ -33,7 +33,7 @@ passport.use(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/auth/google/callback",
+        callbackURL: "https://whitecarrot-googlecalendar-application-1.onrender.com//auth/google/callback",
       },
       (accessToken, refreshToken, profile, done) => {
         
