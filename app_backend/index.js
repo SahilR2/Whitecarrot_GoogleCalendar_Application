@@ -33,7 +33,7 @@ passport.use(
       {
         clientID: "527040000924-t7cuvb8tg7u1cflme0lc8dl4kuuve9vi.apps.googleusercontent.com",//process.env.GOOGLE_CLIENT_ID,
         clientSecret: "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",//process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "hhttps://whitecarrot-googlecalendar-application-1.onrender.com/auth/google/callback",
+        callbackURL: "https://whitecarrot-googlecalendar-application-1.onrender.com/auth/google/callback",
       },
       (accessToken, refreshToken, profile, done) => {
         
