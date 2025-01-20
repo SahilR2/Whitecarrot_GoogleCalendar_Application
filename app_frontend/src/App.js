@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import lockImage from "./lock_image.png"; 
@@ -18,10 +18,23 @@ const App = () => {
     return format(new Date(dateTime), "hh:mm a");
   };
 
+  const fetchEvents = useCallback(async () => {
+    console.log("Filter Date:", filterDate);
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/events`, {
+        params: { date: filterDate },
+        withCredentials: true,
+      });
+      setEvents(response.data);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  }, [filterDate]);
+
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get("http://sahil12domain.com:5000//auth/status", {
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/status`, {
           withCredentials: true,
         });
         if (response.data.isAuthenticated) {
@@ -33,31 +46,20 @@ const App = () => {
       }
     };
     checkLoginStatus();
-  }, []);
+  }, [fetchEvents]);
 
   
   const handleLogin = () => {
-    window.location.href = "http://sahil12domain.com:5000/auth/google";
+    window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/google`;
   };
 
   
-  const fetchEvents = async () => {
-    console.log("Filter Date:", filterDate); 
-    try {
-      const response = await axios.get("http://sahil12domain.com:5000/api/events", {
-        params: { date: filterDate },
-        withCredentials: true,
-      });
-      setEvents(response.data);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
+
 
   
   const handleLogout = async () => {
     try {
-      await axios.get("http://3.91.252.174:5000/logout", {
+      await axios.get(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
         withCredentials: true, 
       });
       setIsLoggedIn(false);
