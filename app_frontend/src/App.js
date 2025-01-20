@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get("https://whitecarrot-googlecalendar-application-1.onrender.com/api/auth/status", {
+        const response = await axios.get("http://localhost:5000/api/auth/status", {
           withCredentials: true,
         });
         if (response.data.isAuthenticated) {
@@ -37,14 +37,14 @@ const App = () => {
 
   
   const handleLogin = () => {
-    window.location.href = "https://whitecarrot-googlecalendar-application-1.onrender.com/auth/google";
+    window.location.href = "http://localhost:5000/auth/google";
   };
 
   
   const fetchEvents = async () => {
     console.log("Filter Date:", filterDate); 
     try {
-      const response = await axios.get("https://whitecarrot-googlecalendar-application-1.onrender.com/api/events", {
+      const response = await axios.get("http://localhost:5000/api/events", {
         params: { date: filterDate },
         withCredentials: true,
       });
@@ -57,7 +57,7 @@ const App = () => {
   
   const handleLogout = async () => {
     try {
-      await axios.get("https://whitecarrot-googlecalendar-application-1.onrender.com/logout", {
+      await axios.get("http://localhost:5000/logout", {
         withCredentials: true, 
       });
       setIsLoggedIn(false);
