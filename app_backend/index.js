@@ -1,4 +1,4 @@
-// Here i'm using passport ...
+// Here i'm using passportjs for secure authentications and sessions, google apis for fetching calendar events
 
 require('dotenv').config();
 
