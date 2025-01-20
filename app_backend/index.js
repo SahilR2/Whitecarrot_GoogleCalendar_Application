@@ -58,7 +58,7 @@ passport.use(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.REDIRECT_URI,
+        callbackURL: "https://whitecarrot-googlecalendar-application-1.onrender.com/auth/google/callback"//process.env.REDIRECT_URI,
       },
       (accessToken, refreshToken, profile, done) => {
         
