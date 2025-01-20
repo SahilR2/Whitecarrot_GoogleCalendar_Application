@@ -20,7 +20,7 @@ This project allows users to log in using **Google Single Sign-On (SSO)** and vi
 
 ## **Technologies**
 - **Frontend**: React.js, Framer Motion, Axios, CSS, date-fns
-- **Backend**: Node.js, Express, Passport.js, Google APIs, CORS, Express-Session
+- **Backend**: Node.js, Express, Passport.js, Google APIs, CORS, Express-Session, Mongodb (sessions)
 - **Authentication**: Google OAuth2
 - **Environment Management**: Dotenv
 
