@@ -1,4 +1,4 @@
-// Here i'm using passport ...
+// Here i'm using passportjs for secure authentications and sessions, google apis for fetching calendar events
 
 require('dotenv').config();
 
@@ -12,16 +12,16 @@ const cors = require('cors');
 const app = express();
 
 app.use(session({
-    secret : process.env.SESSION,
+    secret : "77c073843ab7da94807bcb84c6a0ad6ae94d58413a0dfb9adf5e886ad68c3e7a19ea3581f961fe6461405991325234e5c3994b067cdd99fe59b40791dfb0a7ac54d063d3f801427c1dc6e19a0ae75ced028c034520c5bd66bf2667ccecff5bfd69ff0f91641997b1673722c073f56ea6edf72a12397efe03fd944522330570",//process.env.SESSION,
     resave : false,
     saveUninitialized : true
 })
 );
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://whitecarrot-google-calendar-application.vercel.app",
     credentials: true  
-}));
+})); //most imp else i got error
 
 app.use(passport.initialize());
 app.use(passport.session()); // taki express session integrate hojaye
@@ -31,9 +31,9 @@ app.use(passport.session()); // taki express session integrate hojaye
 passport.use(
     new Google_Strategy(
       {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/auth/google/callback",
+        clientID: "527040000924-t7cuvb8tg7u1cflme0lc8dl4kuuve9vi.apps.googleusercontent.com",//process.env.GOOGLE_CLIENT_ID,
+        clientSecret: "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",//process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "hhttps://whitecarrot-googlecalendar-application-1.onrender.com/auth/google/callback",
       },
       (accessToken, refreshToken, profile, done) => {
         
@@ -72,7 +72,7 @@ app.get("/api/auth/status", (req, res) => {
 app.get("/auth/google/callback",
     passport.authenticate("google", {failureRedirect : "/"}),
     (req, res) => {
-        res.redirect("http://localhost:3000"); 
+        res.redirect("https://whitecarrot-google-calendar-application.vercel.app"); 
     }
 );
 
@@ -101,13 +101,26 @@ app.get("/api/events", async (req, res) => {
       orderBy: "startTime",
     });
 
-    const events = response.data.items.map((event) => ({
+    let events = response.data.items.map((event) => ({
       id: event.id,
       summary: event.summary,
       start: event.start,
       end: event.end,
       location: event.location || "No location",
     }));
+
+    if (date) {
+      const filterDateObj = new Date(date);
+      events = events.filter((event) => {
+        const eventDate = new Date(event.start.dateTime || event.start.date);
+        return (
+          eventDate.getFullYear() === filterDateObj.getFullYear() &&
+          eventDate.getMonth() === filterDateObj.getMonth() &&
+          eventDate.getDate() === filterDateObj.getDate()
+        );
+      });
+    }
+
 
     res.json(events);
   } catch (error) {
@@ -119,7 +132,7 @@ app.get("/api/events", async (req, res) => {
 
  
 app.get("/logout", (req, res) => {
-    //i used passport logOut which logouts the user and route it to base url but then for err logging im using this 
+    //i used passport logOut previously which logouts the user and route it to base url but then for err logging im using older method 
     req.logout((err) => {
       if (err) {
         return res.status(500).json({ error: "Error logging out" });
