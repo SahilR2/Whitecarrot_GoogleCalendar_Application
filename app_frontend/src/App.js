@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/status", {
+        const response = await axios.get("/api/auth/status", {
           withCredentials: true,
         });
         if (response.data.isAuthenticated) {
@@ -37,14 +37,14 @@ const App = () => {
 
   
   const handleLogin = () => {
-    window.location.href = "http://localhost:5000/auth/google";
+    window.location.href = "/auth/google";
   };
 
   
   const fetchEvents = async () => {
     console.log("Filter Date:", filterDate); 
     try {
-      const response = await axios.get("http://localhost:5000/api/events", {
+      const response = await axios.get("/api/events", {
         params: { date: filterDate },
         withCredentials: true,
       });
@@ -57,7 +57,7 @@ const App = () => {
   
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:5000/logout", {
+      await axios.get("/logout", {
         withCredentials: true, 
       });
       setIsLoggedIn(false);
