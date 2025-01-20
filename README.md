@@ -89,7 +89,7 @@ Replace `your_client_id`, `your_client_secret`, and `your_session_secret` with t
    ```
 3. Start the server:
    ```bash
-   node server.js
+   node index.js
    ```
    - The backend will run on `http://localhost:5000`.
 
@@ -140,7 +140,7 @@ app_frontend/src/
 ### **Backend**
 ```
 app_backend/
-├── server.js            # Main server file
+├── index.js            # Main server file
 ├── .env                 # Environment variables
 └── package.json         # Dependencies and scripts
 ```
