@@ -19,7 +19,7 @@ app.use(session({
 );
 
 app.use(cors({
-    origin: "http://3.91.252.174:3000",
+    origin: "http://localhost:3000",
     credentials: true  
 })); //most imp else i got error
 
@@ -72,7 +72,7 @@ app.get("/api/auth/status", (req, res) => {
 app.get("/auth/google/callback",
     passport.authenticate("google", {failureRedirect : "/"}),
     (req, res) => {
-        res.redirect("http://3.91.252.174:3000"); 
+        res.redirect("http://localhost:3000"); 
     }
 );
 
