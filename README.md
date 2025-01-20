@@ -56,8 +56,14 @@ To enable Google OAuth2 and Google Calendar API, follow these steps:
    ```
    http://localhost:5000/auth/google/callback
    ```
-6. Click **Save** and then **Create**.
-7. Save the **Client ID** and **Client Secret** for use in your `.env` file.
+6. In Scopes, select
+   - Select ``` ./auth/userinfo.profile ```
+   - Select ``` openid ```
+   - Select ``` ./auth/userinfo.email ```
+   - Select ``` ./auth/calendar ```
+7. Add Test Users if any
+8. Click **Save** and then **Create**.
+9. Save the **Client ID** and **Client Secret** for use in your `.env` file.
 
 ---
 
