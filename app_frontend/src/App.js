@@ -19,7 +19,7 @@ const App = () => {
   };
 
   const fetchEvents = useCallback(async () => {
-    console.log("Filter Date:", filterDate);
+    // console.log("Filter Date:", filterDate);
     try {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/events`, {
         params: { date: filterDate },
@@ -35,8 +35,10 @@ const App = () => {
     const checkLoginStatus = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/auth/status`, {
+
           withCredentials: true,
         });
+        console.log(response);
         if (response.data.isAuthenticated) {
           setIsLoggedIn(true);
           fetchEvents();
