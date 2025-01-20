@@ -19,7 +19,7 @@ app.use(session({
 );
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://sahil12domain.com",
     credentials: true  
 })); //most imp else i got error
 
@@ -33,7 +33,7 @@ passport.use(
       {
         clientID: "527040000924-t7cuvb8tg7u1cflme0lc8dl4kuuve9vi.apps.googleusercontent.com",//process.env.GOOGLE_CLIENT_ID,
         clientSecret: "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",//process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/auth/google/callback",
+        callbackURL: "http://sahil12domain.com:5000/auth/google/callback",
       },
       (accessToken, refreshToken, profile, done) => {
         
@@ -72,7 +72,7 @@ app.get("/api/auth/status", (req, res) => {
 app.get("/auth/google/callback",
     passport.authenticate("google", {failureRedirect : "/"}),
     (req, res) => {
-        res.redirect("http://localhost:3000"); 
+        res.redirect("http://sahil12domain.com"); 
     }
 );
 
@@ -142,6 +142,6 @@ app.get("/logout", (req, res) => {
 });
  
 
-app.listen(5000, ()=>{
+app.listen(5000, '0.0.0.0', ()=>{
     console.log("Server is listening on Port:5000");  
 });
