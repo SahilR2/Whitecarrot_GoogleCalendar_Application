@@ -19,7 +19,7 @@ app.use(session({
 );
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://3.91.252.174:3000",
     credentials: true  
 })); //most imp else i got error
 
@@ -33,7 +33,7 @@ passport.use(
       {
         clientID: "527040000924-t7cuvb8tg7u1cflme0lc8dl4kuuve9vi.apps.googleusercontent.com",//process.env.GOOGLE_CLIENT_ID,
         clientSecret: "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",//process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/auth/google/callback",
+        callbackURL: "http://3.91.252.174:5000/auth/google/callback",
       },
       (accessToken, refreshToken, profile, done) => {
         
@@ -72,7 +72,7 @@ app.get("/api/auth/status", (req, res) => {
 app.get("/auth/google/callback",
     passport.authenticate("google", {failureRedirect : "/"}),
     (req, res) => {
-        res.redirect("http://localhost:3000"); 
+        res.redirect("http://3.91.252.174:3000"); 
     }
 );
 
