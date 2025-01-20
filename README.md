@@ -33,7 +33,7 @@ To enable Google OAuth2 and Google Calendar API, follow these steps:
 ### **Step 1: Create a Project**
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Click on the project dropdown and select **New Project**.
-3. Enter a project name (e.g., `Google-Calendar-Viewer`) and click **Create**.
+3. Enter a project name (e.g., `New Project`) and click **Create**.
 
 ### **Step 2: Enable APIs**
 1. Navigate to **APIs & Services > Library**.
