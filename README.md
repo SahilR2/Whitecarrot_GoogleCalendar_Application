@@ -47,23 +47,14 @@ To enable Google OAuth2 and Google Calendar API, follow these steps:
 3. Configure the OAuth consent screen:
    - Select **External** as the user type.
    - Fill in the required fields (e.g., app name, support email).
+   - Select ``` ./auth/userinfo.profile ```, ``` openid ```,``` ./auth/userinfo.email ```,``` ./auth/calendar ```
    - Add your email under **Test Users**.
-4. Under **Authorized JavaScript origins**, add:
-   ```
-   http://localhost:3000
-   ```
-5. Under **Authorized redirect URIs**, add:
+4. Under **Authorized redirect URIs**, add:
    ```
    http://localhost:5000/auth/google/callback
    ```
-6. In Scopes, select
-   - Select ``` ./auth/userinfo.profile ```
-   - Select ``` openid ```
-   - Select ``` ./auth/userinfo.email ```
-   - Select ``` ./auth/calendar ```
-7. Add Test Users if any
-8. Click **Save** and then **Create**.
-9. Save the **Client ID** and **Client Secret** for use in your `.env` file.
+5. Click **Save** and then **Create**.
+6. Save the **Client ID** and **Client Secret** for use in your `.env` file.
 
 ---
 
